@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - BullQuotient</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js"></script>
+  <style>
+    .bg-logo {
+      background-image: url('./public/logo.png');
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      filter: blur(16px) opacity(0.2);
+    }
+  </style>
+</head>
+<body class="relative flex items-center justify-center min-h-screen bg-gradient-to-tr from-white via-purple-100 to-blue-100">
+
+<!-- Blurred logo background -->
+<div class="absolute inset-0 bg-logo z-0"></div>
+
+<!-- Company name in top-right -->
+<div class="absolute top-4 right-6 text-purple-800 font-bold text-lg z-10">BullQuotient</div>
+
+<!-- Main Card -->
+<div class="relative z-10 bg-white/80 shadow-2xl backdrop-blur-md rounded-2xl p-10 max-w-sm w-full text-center space-y-6">
+  <h1 class="text-3xl font-extrabold text-purple-700">Welcome to BullQuotient</h1>
+  <p class="text-gray-600">Login or Sign Up using your Google Account</p>
+
+  <button onclick="signInWithGoogle()" class="w-full flex items-center justify-center gap-2 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition duration-200">
+    <svg class="w-5 h-5" viewBox="0 0 48 48"><path fill="#fff" d="M44.5 20H24v8.5h11.9C34.4 33.7 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8 2.9l6-6C34.2 4.9 29.4 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21c10.6 0 20-8 21-21 0-.7-.1-1.3-.2-2z"/></svg>
+    Sign in with Google
+  </button>
+</div>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBQSrJSS9mkVYADcYuR_9Q9lPyXBq4mS98",
+    authDomain:"bullquotient-74bf8.firebaseapp.com",
+    projectId: "bullquotient-74bf8",
+    appId: "1:364688375510:web:960e0d4022a4eccb0dd377",
+    storageBucket: "bullquotient-74bf8.appspot.com"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  function signInWithGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider)
+      .then(res => window.location.href = "index.html")
+      .catch(err => alert(err.message));
+  }
+</script>
+</body>
+</html>
